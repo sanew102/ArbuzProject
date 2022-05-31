@@ -19,12 +19,14 @@ class TableCellConfigurator<CellType: ConfigurableCell, DataType>: CellConfigura
     static var reuseId: String { return CellType.reuseIdentifier }
     static var cellClass: AnyClass { return CellType.self }
     
-    let item: DataType
+    var item: DataType
     
     init(item: DataType) {
         self.item = item
     }
-    
+    func setItem(item: DataType) {
+        self.item = item
+    }
     func configure(cell: UIView) {
         (cell as! CellType).configure(data: item)
     }

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 class ViewController: UIViewController {
-    
+    static var shared: ViewController?
     private let items: [CellConfigurator] = [DestinationCellConfigurator(item: "Адрес доставки")]
     private let days: [CellConfigurator] = [DateCellConfigurator(item: "")]
     private let watermelonConf: [CellConfigurator] = [WatermelonCellConfigurator(item: "")]
@@ -16,12 +16,13 @@ class ViewController: UIViewController {
     
     let myTableView: UITableView = {
         let table = UITableView()
-        
+    
         return table
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        ViewController.shared = self
         view.backgroundColor = .white
         myTableView.rowHeight = UITableView.automaticDimension
         myTableView.estimatedRowHeight = 600
@@ -35,14 +36,17 @@ class ViewController: UIViewController {
     
     private func setupView(){
         self.myTableView.separatorStyle = .none
-        myTableView.estimatedRowHeight = 100
-        myTableView.rowHeight = UITableView.automaticDimension
+//        myTableView.estimatedRowHeight = 100
+//        myTableView.rowHeight = UITableView.automaticDimension
     }
     
     private func setupNavigationBar() {
         navigationItem.title = "Оформление заказа"
     }
-    
+    func setAddress(address: String) {
+        (items[0] as! DestinationCellConfigurator).setItem(item: address)
+        myTableView.reloadData()
+    }
     private func setupConstrainst() {
         myTableView.snp.makeConstraints { make in
             make.top.equalToSuperview()

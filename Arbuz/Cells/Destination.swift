@@ -20,6 +20,7 @@ class Destination: UITableViewCell, ConfigurableCell {
     
     let title: UILabel = {
         let title = UILabel()
+        title.numberOfLines = 0
         return title
     }()
     
@@ -52,9 +53,9 @@ class Destination: UITableViewCell, ConfigurableCell {
         }
         title.snp.makeConstraints { make in
             make.leading.equalTo(image.snp.trailing).offset(16)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(24)
-            make.height.equalTo(150)
+            make.top.equalToSuperview().offset(8)
+            make.bottom.equalToSuperview().offset(-8)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 

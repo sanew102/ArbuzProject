@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Adres: UIViewController {
+internal class Adres: UIViewController {
     
     let cityTF: UITextField = {
         let cityTF = UITextField()
@@ -76,6 +76,7 @@ class Adres: UIViewController {
         view.backgroundColor = .white
         view.addSubviews(cityTF, streetTF, flatTF, floarTF, button, image)
         setupConstraints()
+      
     }
     
     @objc func teftFieldEdition() {
@@ -94,8 +95,9 @@ class Adres: UIViewController {
     }
     
     @objc func buttonPressed() {
+        let sharedString = "\(cityTF.text!), улица \(streetTF.text!), квартира \(flatTF.text!), этаж \(floarTF.text!)"
+        ViewController.shared?.setAddress(address: sharedString)
         self.navigationController?.popViewController(animated: true)
-        let adresName = streetTF.text
     }
 
     private func setupConstraints() {
@@ -136,4 +138,5 @@ class Adres: UIViewController {
         }
     }
 }
+
 
